@@ -34,14 +34,14 @@ x[c(1, 6)]
 
 c(One = "a", Two = "y", Last = "r") #  name a vector
 w <- 1:3
-names(w) <- c ("a", "b", "c")
+names(w) <- c("a", "b", "c")
 w
 w["a"]
 w["b"]
 
 q2 <- c(q, "Hockey", "Lacrosse", "Hockey", "Water Polo", "Hockey", "Lacrosse")
 q2
-factor(q2)
+factor(q2) # categorize the data and store it as levels
 z <- c(1, 2, NA, 8, 3, NA, 3)
 is.na(z)
 zChar <- c("Hockey", NA, "Lacrosse")

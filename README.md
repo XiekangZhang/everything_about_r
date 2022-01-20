@@ -4,6 +4,7 @@ install.packages("package name")
 remove.packages("package name")
 library("loading package")
 detach("loaded package")
+getwd(): to get working directory
 
 x <- value / x = value
 
@@ -25,6 +26,8 @@ load binary R files: save(variable name..., file = "path.rdata") --> load("path.
 ggplot2 provides some data --> library(ggplot2), data(diamonds) --> to see all the provided data by using data()
 scrape data from the web: library(XML), library(rvest)
 json: library(rjson) / library(jsonlite)
+
+## Making Statistical Graphs
 
 ## An Introduction to R
 

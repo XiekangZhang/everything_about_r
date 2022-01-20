@@ -12,6 +12,7 @@ the_df
 
 class(the_df$Sport)
 the_df <- data.frame(First = x, Second = y, Sport = q, stringsAsFactors = TRUE)
+# factor the character
 class(the_df$Sport)
 
 nrow(the_df)

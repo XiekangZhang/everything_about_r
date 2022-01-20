@@ -1,5 +1,6 @@
 library(ggplot2)
 data(diamonds)
+head(diamonds)
 
 # hist
 hist(diamonds$carat)
@@ -11,9 +12,14 @@ plot(price ~ carat, diamonds)
 plot(price ~ carat, data = diamonds, main = "new title")
 
 # boxplots
+# Q1-1.5*IQR, Q1, Q2(50%), Q3, Q3 + 1.5*IQR, IQR = Q3 - Q1
 boxplot(diamonds$carat)
 
 # ggplot2 --> build graphics layer by layer by using + sign
+# Information + Layer
+# geom_point, geom_histogram, geom_line
+# aes(x, y) --> mapping
+# binwidth = (max - min) / 30
 ggplot(data = diamonds) + geom_histogram(aes(x = carat))
 ggplot(data = diamonds) + geom_histogram(aes(x = carat), binwidth = .5)
 ggplot(data = diamonds) + geom_histogram(aes(x = carat), binwidth = .1)
