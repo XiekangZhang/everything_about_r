@@ -29,6 +29,10 @@ json: library(rjson) / library(jsonlite)
 
 ## Making Statistical Graphs
 
+ggplot2 library:
+
+- ggplot(data, aes?) + geom_histogram(aes?)/geom_density(aes?)/geom_point(aes?)/geom_line(aes?)
+
 ## An Introduction to R
 
 ### Introduction and preliminaries
