@@ -1,4 +1,4 @@
-# everything_about_r
+# Oreilly R
 
 install.packages("package name")
 remove.packages("package name")
@@ -13,7 +13,7 @@ x <- value / x = value
 vector: everything in R is vector. A vector is a collection of elements, all of the same type
 dataframe: A dataframe can contain many different data type in each column. --> could be understood as excel spreedsheet
 lists --> hold arbitrary objects of either the same type or varying types
-matrix: restricted to two dimensions
+matrix: restricted to two dimensions with same type
 arrays: a multidimensional vector --> all the same type
 
 ## Reading Data into R
@@ -33,7 +33,46 @@ ggplot2 library:
 
 - ggplot(data, aes?) + geom_histogram(aes?)/geom_density(aes?)/geom_point(aes?)/geom_line(aes?)
 
-## An Introduction to R
+## Group Manipulation
+
+- apply(matrix, margin, function, na.rm=Boolean)
+- lapply(list/vector, ...) -> return list
+- sapply(list/vector, ...) -> return vector
+- mapply(func, list/vector, list/vector) -> return vector
+- tapply(array, INDEX, func) -> return vector
+
+## aggregate --> quite slow
+
+- formula: calculation ~ group
+- aggregate(formula, data, func, na.rm=Boolean)
+
+## plyr --> split-apply-combine, could be slow
+
+- ddply(dataframe, .variables = col used to split data, .fun = func) -> return dataframe
+- llply(list, func) --> return list
+- laply(list, func) --> return array/vector without name
+
+## data.table
+
+- data.frame return character as factor, but data.table not
+- df[col] or df$col to access data, dt[, list(col), with=TRUE --> take cols as char]
+- dt[selection keys by c()/J(multiple-keys), func(args)/list(col_name=func(col),...), by=list(cols)/with] --> setkey(dt, key_col)
+
+## dplyr
+
+- %>% pipe operation
+- tbl %>% select(col1|col1_index, col2|col2_index) = select(tbl, col1, col2)
+- tbl %>% select(one_of("col1", "col2"))
+- select(starts_with(char)|ends_with(char)|contains(char)|matches(reg)|-col)
+- filter(col == ""|col %in% c("", "") --> or|)
+- slice()
+- mutate(new_col = value, col = new value)
+- summarise(func(args))
+- group_by(col1, col2)
+- arrange(col|desc(col))
+- do(func(., args)) --> . means the same input tbl
+
+# An Introduction to R
 
 ### Introduction and preliminaries
 

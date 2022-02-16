@@ -157,9 +157,10 @@ head(iris)
 # replace . with empty
 names(iris) <- gsub("\\.", "", names(iris))
 head(iris)
-rPlot(x = "SepalWidth", y = "SepalLength", facet = "Species",
+r1 <- rPlot.formula(x = ~SepalWidth, y = ~SepalLength, facet = ~Species,
     color = "Species", type = "point", data = iris
 )
+r1$show(cdn=TRUE)
 
 # only works on RStudio
 data(economics, package = "ggplot2")
