@@ -1,0 +1,31 @@
+---
+title: RMarkdown Primer
+author: Xiekang Zhang
+output: html_document
+---
+
+# Level 1 Heading
+
+This a sentence. Any text here gets rendered as normal text.
+
+A blank line creates a new paragraph, still in the same section.
+
+# Another Level 1 Heading
+
+More text.
+
+## Level 2 Heading
+
+This is a subsection under the level 1 heading.
+
+# Back to Level 1
+
+This starts a new section.
+
+# Text Formatting
+
+_italic_
+
+__bold__
+
+___italic and bold___
