@@ -1,0 +1,156 @@
+---
+title: Simple Shiny Document
+author: Xiekang Zhang
+output: html_document
+runtime: shiny
+---
+
+# Select Input
+```{r select-input, echo=FALSE}
+selectInput(
+  inputId="ExampleDropDown",
+  label="Please make a selection",
+  choices=list(
+    "value 1" = 1,
+    "value 2" = 2,
+    "value 3" = 3
+  )
+)
+```
+
+```{r print-select-input}
+renderPrint(input$ExampleDropDown)
+```
+
+# Slider Input
+```{r slider-input}
+sliderInput(
+  inputId="SliderExample",
+  label="This is a slider",
+  min=0,
+  max=5,
+  value=3
+)
+
+sliderInput(
+  inputId="SliderExample2",
+  label="Two-ended slider",
+  min=0,
+  max=10,
+  value=c(4, 6)
+)
+```
+
+# Checkbox Input
+```{r checkbox-input}
+checkboxInput(
+  inputId="checkExample",
+  label="Single Check box"
+)
+
+checkboxGroupInput(
+  inputId="checkGroupSample",
+  label="Multiple check boxes",
+  choices=list("A", "B", "C")
+)
+```
+
+# Radio Buttons
+
+```{r radio-buttons}
+radioButtons(
+  inputId="radiosample",
+  label="Please choose one",
+  choices=list("A", "B", "C")
+)
+```
+
+# Date Input
+```{r date-input}
+dateInput(
+  inputId="DateChoice",
+  label="Date Selector"
+)
+
+dateRangeInput(
+  inputId="DateRangeChoice",
+  label="Please select dates"
+)
+
+dateRangeInput(
+  inputId="DateRangeChoice2",
+  label="Please select dates",
+  format="mm/dd/yyyy"
+)
+```
+
+# Text Input
+```{r text-input}
+textInput(
+  inputId="TextSample",
+  label="Space to enter text"
+)
+
+textAreaInput(
+  inputId="TextAreaSample",
+  label="Area to enter a lot of text"
+)
+
+passwordInput(
+  inputId="PasswordSample",
+  label="Protect your password"
+)
+```
+
+# Render Text
+```{r text-input-testing}
+textInput(
+  inputId="TextToSee",
+  label="Please enter some text"
+)
+```
+
+```{r render-text}
+renderPrint(input$TextToSee)
+
+renderText(input$TextToSee)
+```
+
+# Render Data
+
+```{r render-data}
+renderTable(
+  mtcars
+)
+
+renderDataTable(mtcars)
+
+DT::renderDataTable(mtcars)
+```
+
+# Plotting
+```{r render-plot}
+renderPlot(hist(mtcars$mpg))
+```
+
+```{r plot-options}
+selectInput(
+  inputId="PlotColumn",
+  label="choose a column",
+  choices=names(mtcars)
+)
+
+sliderInput(
+  inputId="Breaks",
+  label="Choose number of breaks",
+  min=5, 
+  max=50,
+  value=30
+)
+```
+
+```{r user-plot}
+renderPlot(hist(mtcars[, input$PlotColumn], breaks=input$Breaks))
+```
+
+

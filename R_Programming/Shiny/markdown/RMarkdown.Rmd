@@ -1,8 +1,24 @@
 ---
 title: RMarkdown Primer
 author: Xiekang Zhang
-output: html_document
+output: 
+    html_document:
+        number_sections: true
+        toc: true
+        toc_float:
+            collapsed: false
+            smooth_scroll: true
+        code_download: true
+        df_print: "paged"
+    pdf_document: 
+        number_sections: true
+        toc: true
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE, fig.align = 'center')
+```
+
 
 # Level 1 Heading
 
@@ -29,3 +45,110 @@ _italic_
 __bold__
 
 ___italic and bold___
+
+# Lists {#TheLists}
+
+## Unordered Lists
+
+- apples
+- bananas
+- oranges
+- kiwis
+
+## Ordered Lists
+
+### Numbered Lists
+
+1. New York
+1. New Jersey
+1. Naples
+1. Connecticut
+1. Detroit
+
+### Lettered Lists
+
+a. Coal
+a. Wood
+a. Gas
+
+## Nested Lists
+
+1. New York
+    a. Coal
+    a. Wood
+    a. Gas
+        - Baker's Pride
+        - Bari
+    a. Electric
+1. New Jersey
+1. Philadelphia
+1. Detroit
+
+# Links
+
+[Google](www.google.com)
+
+[Check out the pizza section](#TheLists)
+
+# Math
+
+$$
+    \bar{x} = \sum_{i=1}^n \frac{x_i}{n}
+$$
+
+Inline equations look like $y = mx + b$. 
+
+# Footnotes
+
+We^[Everyone enjoying this video] are learning markdown^[Markdown is a simple way of writing documents] on our way to learning RMarkdown. 
+
+# Simple Code
+
+```{r this-label}
+1 + 1
+```
+
+```{r multiplication}
+4 * 2
+```
+
+```{r subtraction}
+5 - 3
+```
+
+```{r multi-line}
+1 + 1
+4 * 2
+5 - 3
+```
+
+# Data Display
+```{r show-data}
+#install.packages("ggplot2")
+#require('ggplot2')
+data(diamonds, package='ggplot2')
+head(diamonds)
+```
+
+```{r show-data-2}
+knitr::kable(head(diamonds))
+```
+
+```{r show-data-3}
+#install.packages("DT")
+DT::datatable(head(diamonds))
+```
+
+```{r show-data-4}
+head(diamonds)
+```
+
+# Plots
+```{r simple-plot}
+plot(1:10)
+```
+
+```{r another-plot, fig.cap='A simple plot', cache=TRUE, echo=FALSE}
+plot(1:10)
+```
+
