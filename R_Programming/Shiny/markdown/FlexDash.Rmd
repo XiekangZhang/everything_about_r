@@ -1,0 +1,54 @@
+---
+title: "Flex Eample"
+author: "Xiekang"
+date: '2022-06-22'
+output:
+    flexdashboard::flex_dashboard:
+        orientation: columns
+        vertical_layout: fill
+        self_contained: true
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE)
+```
+
+```{r load-data, cache=TRUE}
+data(economics, package = "ggplot2")
+```
+
+```{r load-packages, cache=TRUE}
+library(ggplot2)
+```
+
+
+
+## Left
+
+### One
+
+```{r display-econ}
+DT::renderDataTable(
+  DT::datatable(economics)
+)
+```
+
+## Right
+
+### Top
+
+```{r hist-econ}
+renderPlot(
+  ggplot(economics, aes(x=psavert)) + geom_histogram()
+)
+```
+
+### Bottom
+
+```{r scatter-econ}
+renderPlot(
+  ggplot(economics, aes(x=psavert, y=pce)) + geom_point()
+)
+```
+

@@ -1,0 +1,64 @@
+---
+title: "Reactivity"
+author: "Xiekang"
+date: '2022-06-22'
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r text-input}
+textInput(
+  inputId="TextInput",
+  label="Please enter some text",
+  value="Starting text"
+)
+```
+
+```{r text-render}
+renderText(input$TextInput)
+```
+
+# Naive Reactivity
+
+```{r date-input}
+dateInput(
+  inputId="DateField",
+  label="Select a Date"
+)
+
+renderText(input$DateField)
+```
+
+```{r load-lubridate}
+# install.packages("lubridate")
+library(lubridate)
+```
+
+This is not the right way to do this.
+```{r display-date, eval=FALSE}
+theDate <- input$DateField
+
+renderText(sprintf(
+  "%s %s, %s",
+  month(theDate, label=TRUE, abbr=FALSE),
+  day(theDate),
+  year(theDate)
+))
+```
+
+# Correct Reactivity
+
+```{r display-date-2}
+theDate <- reactive(input$DateField)
+
+renderText(sprintf(
+  "%s %s, %s",
+  month(theDate(), label=TRUE, abbr=FALSE),
+  day(theDate()),
+  year(theDate())
+))
+```

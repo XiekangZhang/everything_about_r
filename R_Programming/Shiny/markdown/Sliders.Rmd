@@ -1,0 +1,74 @@
+---
+title: "Slideshow Fun"
+author: "Xiekang"
+date: '2022-06-22'
+output: 
+    ioslides_presentation:
+        logo: logo.png
+        widescreen: yes
+        self_contained: yes
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## R Markdown
+
+This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with R Output
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
+## Fruit - Level 2 for a new slides
+
+- Apples
+- Bananas
+- Kiwis
+
+<div class="notes">
+- This is a note to the speaker
+- The audience won't see it
+</div>
+
+## Graph Slide
+
+```{r load-date}
+library(ggplot2)
+data(diamonds)
+```
+```{r hist, message=FALSE, fig.align='center'}
+possible <- names(diamonds)[sapply(diamonds, is.numeric)]
+
+selectInput(
+  inputId="SelCol",
+  label="Choose a column",
+  choices=possible
+)
+
+renderPlot(
+  ggplot(diamonds, aes_string(x=input$SelCol)) + geom_histogram()
+)
+```
+
+<div class="notes">
+Histogram of diamond prices
+</div>
