@@ -7,6 +7,10 @@ output:
         orientation: columns
         vertical_layout: fill
         self_contained: true
+        social: ["twitter", "facebook", "menu"]
+        logo: logo.png
+        favicon: favicon.png
+        source_code: embed
 runtime: shiny
 ---
 
@@ -20,9 +24,54 @@ data(economics, package = "ggplot2")
 
 ```{r load-packages, cache=TRUE}
 library(ggplot2)
+library(magrittr)
+library(leaflet)
+```
+
+```{r read-map-data}
+pizza <- jsonlite::fromJSON("FavoriteSpots.json") %>% tidyr::unnest(cols = c(Details, Coordinates))
+```
+
+```{r read-file}
+theData <- reactive({
+  if(is.null(input$FileUpload)) {
+    return(NULL)
+  }
+  readr::read_csv(input$FileUpload$datapath)
+})
+```
+
+# First Page
+
+## Controls {.sidebar data-weight=300}
+
+```{r file-input}
+fileInput(
+  inputId="FileUpload",
+  label="Please upload a file",
+  multiple=FALSE,
+  buttonLabel="Upload",
+  placeholder="waiting for File"
+)
 ```
 
 
+## Data View {.tabset}
+
+### Table
+
+```{r show-uploaded-data}
+DT::renderDataTable(DT::datatable(theData()))
+```
+
+### Summary
+
+```{r show-summary}
+renderPrint(summary(theData()))
+```
+
+
+# Second Page
 
 ## Left
 
@@ -34,13 +83,23 @@ DT::renderDataTable(
 )
 ```
 
+### Selector {data-height=150}
+
+```{r hist-var}
+selectInput(
+  inputId="HistVar",
+  label="Please select a column",
+  choices=names(economics)
+)
+```
+
 ## Right
 
 ### Top
 
 ```{r hist-econ}
 renderPlot(
-  ggplot(economics, aes(x=psavert)) + geom_histogram()
+  ggplot(economics, aes_string(x=input$HistVar)) + geom_histogram()
 )
 ```
 
@@ -48,7 +107,47 @@ renderPlot(
 
 ```{r scatter-econ}
 renderPlot(
-  ggplot(economics, aes(x=psavert, y=pce)) + geom_point()
+  ggplot(economics, aes_string(x=input$HistVar, y='pce')) + geom_point()
+)
+```
+
+# Page Three {data-navmenu="Menu A"}
+
+Manji
+
+# Page Four {data-navmenu="Menu A"}
+
+Snake
+
+# Page Five {data-navmenu="Menu B"}
+
+Lizard
+
+# Page Six {data-navmenu="Menu B"}
+
+Dragon
+
+# Map
+
+## 
+
+### Data
+
+```{r pizza-table}
+DT::renderDataTable(DT::datatable(pizza, rownames = FALSE, options = list(scrollx=TRUE)))
+```
+
+
+##
+
+### Map
+
+```{r pizza-map}
+renderLeaflet(
+  leaflet(pizza) %>% addTiles() %>% addMarkers(
+    lng= ~longitude, lat= ~latitude, 
+    popup= ~Name
+  )
 )
 ```
 
